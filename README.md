@@ -1,6 +1,6 @@
 # Etoug-Ebe-Area-Hackathon
 
-A feature-rich, live-preview markdown editor with export, import, syntax highlighting, and document statistics.
+This is a web-based celebration and prize-giving application created for the Etoug-Ebe Area Hackathon. The application features a visually stunning, futuristic interface with animated backgrounds, celebration timers, and winner announcements. It was designed to honor hackathon winners with a festive and engaging user experience.
 
 ## Preview
 
