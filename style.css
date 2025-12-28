@@ -1,0 +1,620 @@
+:root {
+  --electric-blue: #00bfff; /* Electric Blue */
+  --gold: #FFD700; /* Gold for celebration */
+  --celebration-green: #32CD32; /* Fresh green for celebration */
+  --celebration-purple: #9370DB; /* Purple for celebration */
+  --celebration-pink: #FF69B4; /* Pink for celebration */
+  --dark-background: #1a1a2e;
+  --text-light: #e0e0e0;
+  --glass-background: rgba(255, 215, 0, 0.1); /* Gold tint for glass in celebration mode */
+  --glass-border: rgba(255, 215, 0, 0.4);
+  --glass-shadow: rgba(255, 215, 0, 0.4);
+}
+
+/* Base styles */
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: #0d0d1a; /* Dark background as in the image */
+  color: var(--text-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  flex-direction: row;
+  /* Subtle background elements */
+  background-image: radial-gradient(
+      circle at 15% 50%,
+      rgba(0, 191, 255, 0.05) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 85% 60%,
+      rgba(0, 191, 255, 0.05) 0%,
+      transparent 40%
+    ),
+    linear-gradient(to bottom right, #0a0a1a, #1a1a2e);
+}
+
+/* Background elements */
+.background-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.background-scene {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #001f3f, #000a1a);
+  opacity: 0.85;
+  z-index: 1;
+}
+
+/* Main content container */
+.main-container {
+  text-align: center;
+  background: var(--glass-background); /* Lighter blue tint for the glass */
+  padding: 40px 60px;
+  border-radius: 15px;
+  border: 1px solid var(--glass-border); /* Base border */
+  box-shadow: 0 0 30px var(--glass-shadow);
+  backdrop-filter: blur(25px); /* Stronger blur for glass effect */
+  -webkit-backdrop-filter: blur(25px); /* Safari support */
+
+  z-index: 10;
+  position: fixed;
+  max-width: 900px;
+  overflow: hidden; /* Important for clean glass edges and internal glow */
+
+  /* Circuit board pattern */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0 50L50 0L100 50L50 100Z" fill="none" stroke="rgba(0,191,255,0.08)" stroke-width="0.5"/><path d="M25 50L50 25L75 50L50 75Z" fill="none" stroke="rgba(0,191,255,0.08)" stroke-width="0.5"/></svg>');
+  background-size: 50px 50px;
+  background-blend-mode: overlay;
+
+  /* Animated Border Glow */
+  animation: border-glow 2s infinite alternate ease-in-out;
+}
+
+@keyframes border-glow {
+  0% {
+    box-shadow: 0 0 15px var(--electric-blue),
+      inset 0 0 5px var(--electric-blue);
+    border-color: var(--glass-border);
+  }
+  100% {
+    box-shadow: 0 0 35px var(--electric-blue),
+      inset 0 0 10px var(--electric-blue);
+    border-color: #00ffff; /* Brighter blue for peak glow */
+  }
+}
+
+/* Title styles */
+.celebration-title {
+  font-family: "Orbitron", sans-serif;
+  font-size: 3.5em;
+  color: var(--electric-blue);
+  margin-bottom: 30px;
+  text-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
+  letter-spacing: 2px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.celebration-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--electric-blue),
+    transparent
+  );
+  box-shadow: 0 0 10px var(--electric-blue);
+  opacity: 0.7;
+}
+
+.celebration-title.demo-active {
+  color: #00ff64;
+  text-shadow: 0 0 15px rgba(0, 255, 100, 0.8);
+}
+
+.celebration-title.demo-active::after {
+  background: linear-gradient(
+    to right,
+    transparent,
+    #00ff64,
+    transparent
+  );
+  box-shadow: 0 0 10px #00ff64;
+}
+
+.celebration-title.celebration-active {
+  color: var(--gold);
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+  animation: celebrate-glow 1.5s infinite alternate;
+}
+
+.celebration-title.celebration-active::after {
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--gold),
+    transparent
+  );
+  box-shadow: 0 0 10px var(--gold);
+  animation: celebrate-line-glow 2s infinite alternate;
+}
+
+@keyframes celebrate-glow {
+  0% {
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+  }
+  100% {
+    text-shadow: 0 0 20px rgba(255, 215, 0, 1), 0 0 30px rgba(255, 100, 0, 0.8);
+  }
+}
+
+@keyframes celebrate-line-glow {
+  0% {
+    box-shadow: 0 0 5px var(--gold);
+  }
+  100% {
+    box-shadow: 0 0 15px var(--gold), 0 0 20px var(--celebration-green);
+  }
+}
+
+/* Quote section */
+.quote-section {
+  margin: 20px 0 40px 0;
+}
+
+.quote-display {
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px; /* Adjusted spacing */
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+.quote {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.7em; /* Increased font size for better readability */
+  font-weight: 400;
+  color: var(--text-light);
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Enhanced gold shimmer effect */
+  word-wrap: break-word;
+  hyphens: auto;
+  width: 100%;
+  text-align: center;
+  padding: 1px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.quote.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quote.celebration-active {
+  color: var(--gold);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+  animation: quote-celebrate 2s infinite alternate;
+}
+
+@keyframes quote-celebrate {
+  0% {
+    transform: translateY(0) scale(1);
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+  }
+  100% {
+    transform: translateY(-3px) scale(1.02);
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.9), 0 0 20px rgba(255, 100, 0, 0.6);
+  }
+}
+
+/* Timer section */
+.timer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.timer-display {
+  margin-bottom: 20px;
+  display: none; /* Hidden by default, shown when started */
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: "Orbitron", sans-serif;
+  color: var(--gold); /* Gold color for celebration timer */
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.timer-display.active {
+  display: flex;
+  animation: timer-fade-in 1s ease-out;
+}
+
+@keyframes timer-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.timer-segment {
+  font-size: 3em;
+  min-width: 0.8em; /* Ensure consistent width for two digits */
+  text-align: center;
+  position: relative;
+  transition: transform 0.1s ease-out; /* Subtle bounce on change */
+}
+
+.timer-segment.pulse {
+  animation: timer-pulse 0.4s ease-out;
+}
+
+@keyframes timer-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.timer-colon {
+  font-size: 2.5em;
+  margin: 0 5px;
+  animation: colon-blink 1s infinite step-end;
+}
+
+@keyframes colon-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.timer-label {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+  color: var(--text-light);
+  margin-top: 10px;
+  position: absolute;
+  bottom: -30px; /* Position below the numbers */
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap; /* Prevent wrapping */
+  opacity: 0.8;
+}
+
+/* Celebration specific styling */
+.celebration-phase {
+  animation: celebration-pulse 1.5s infinite, confetti-fall 3s infinite;
+}
+
+@keyframes celebration-pulse {
+  0% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+  50% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 100, 0, 0.6); }
+  100% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+}
+
+@keyframes confetti-fall {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+/* Demo/Pitch specific styling */
+.demo-phase {
+  animation: demo-pulse 2s infinite;
+}
+
+@keyframes demo-pulse {
+  0% { box-shadow: 0 0 15px rgba(0, 255, 100, 0.5); }
+  50% { box-shadow: 0 0 25px rgba(0, 255, 100, 0.8); }
+  100% { box-shadow: 0 0 15px rgba(0, 255, 100, 0.5); }
+}
+
+.start-button {
+  background: linear-gradient(135deg, var(--gold), #FFA500); /* Gradient for festive look */
+  color: var(--dark-background);
+  border: none;
+  padding: 15px 35px;
+  font-size: 1.4em;
+  font-family: "Orbitron", sans-serif;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease, opacity 0.3s ease; /* Added opacity transition */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+.start-button:hover:not(:disabled) {
+  /* Added :not(:disabled) */
+  background: linear-gradient(135deg, #FFA500, var(--gold));
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.9);
+}
+
+.start-button:active:not(:disabled) {
+  /* Added :not(:disabled) */
+  transform: translateY(0);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.start-button:disabled {
+  /* Style for disabled button */
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6); /* Gold glow when celebration is active */
+  background-color: var(--gold); /* Gold color when celebration is active */
+  transform: none;
+}
+
+/* Winner Announcement Section */
+.winner-section {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 900px;
+  background: rgba(25, 25, 45, 0.9); /* Dark theme background */
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid rgba(255, 215, 0, 0.5); /* Gold border */
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  backdrop-filter: blur(10px);
+  z-index: 20;
+  text-align: center;
+  animation: winner-section-glow 3s infinite alternate;
+}
+
+@keyframes winner-section-glow {
+  0% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
+  100% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+}
+
+.winner-title {
+  color: var(--gold);
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.8em;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+}
+
+.winner-display {
+  min-height: 180px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 15px;
+  justify-content: center;
+  align-items: stretch;
+  overflow-x: hidden; /* Hide horizontal scrollbar since we want all cards visible */
+}
+
+.winner-card {
+  text-align: center;
+  padding: 15px;
+  background: rgba(30, 30, 50, 0.7);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
+  flex: 1; /* Allow cards to grow and share available space */
+  min-width: 250px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.winner-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  background: rgba(40, 40, 60, 0.8);
+}
+
+.winner-place {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.8em;
+  color: var(--gold);
+  margin-bottom: 5px;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+}
+
+.winner-team {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2em;
+  color: #ffffff;
+  margin: 8px 0;
+  font-weight: bold;
+}
+
+.winner-project {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+  color: #e0e0ff;
+  margin: 8px 0;
+  font-style: italic;
+}
+
+.winner-description {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9em;
+  color: #c0c0ff;
+  margin: 8px 0;
+}
+
+.winner-placeholder {
+  color: #a0a0a0;
+  font-style: italic;
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 0;
+}
+
+/* Removed navigation buttons as all cards are displayed */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 30px 40px;
+  }
+  .celebration-title {
+    font-size: 2.5em;
+  }
+  .quote {
+    font-size: 1.4em;
+    line-height: 1.4;
+  }
+  .quote-display {
+    min-height: 240px;
+    margin-bottom: 40px; /* Ensure adequate spacing on smaller screens */
+    padding: 15px;
+  }
+  .timer-segment {
+    font-size: 2.5em;
+  }
+  .timer-colon {
+    font-size: 2em;
+  }
+  .timer-label {
+    font-size: 0.9em;
+  }
+  .start-button {
+    font-size: 1.2em;
+    padding: 12px 25px;
+  }
+
+  .winner-section {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .winner-title {
+    font-size: 1.5em;
+  }
+
+  .winner-place {
+    font-size: 1.5em;
+  }
+
+  .winner-team {
+    font-size: 1.2em;
+  }
+
+  .winner-project {
+    font-size: 1em;
+  }
+
+  .nav-button {
+    padding: 8px 15px;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-container {
+    padding: 20px 25px;
+  }
+  .celebration-title {
+    font-size: 2em;
+  }
+  .quote {
+    font-size: 1.1em;
+    line-height: 1.3;
+  }
+  .quote-display {
+    min-height: 180px;
+    margin-bottom: 35px; /* Ensure adequate spacing on mobile */
+  }
+  .timer-segment {
+    font-size: 2em;
+  }
+  .timer-colon {
+    font-size: 1.5em;
+  }
+  .timer-label {
+    font-size: 0.8em;
+  }
+  .start-button {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+
+  .winner-section {
+    bottom: 10px;
+    width: 98%;
+    padding: 10px;
+  }
+
+  .winner-title {
+    font-size: 1.3em;
+  }
+
+  .winner-place {
+    font-size: 1.3em;
+  }
+
+  .winner-team {
+    font-size: 1.1em;
+  }
+
+  .winner-project {
+    font-size: 0.9em;
+  }
+
+  .winner-description {
+    font-size: 0.8em;
+  }
+
+  .nav-button {
+    padding: 6px 12px;
+    font-size: 0.8em;
+  }
+}

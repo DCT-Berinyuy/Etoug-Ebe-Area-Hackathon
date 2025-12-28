@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Hackathon - Celebration & Prize Giving</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Background Effects -->
+  <canvas id="binaryRain" class="background-canvas"></canvas>
+  <div class="background-scene"></div>
+
+  <!-- Main Content Container -->
+  <main class="main-container">
+    <header class="main-header">
+      <h1 class="title celebration-title">Celebration & Prize Giving - Honoring Our Winners!</h1>
+    </header>
+
+    <!-- Quote Display Section -->
+    <section class="quote-section">
+      <div class="quote-display">
+        <p id="animated-quote" class="quote"></p>
+      </div>
+    </section>
+
+    <!-- Timer Section -->
+    <section class="timer-section">
+      <div id="timer-display" class="timer-display">
+        <span id="timer-hours" class="timer-segment">00</span>
+        <span class="timer-colon">:</span>
+        <span id="timer-minutes" class="timer-segment">00</span>
+        <span class="timer-colon">:</span>
+        <span id="timer-seconds" class="timer-segment">00</span>
+        <p class="timer-label">Celebration Time</p>
+      </div>
+      <button id="start-button" class="start-button">Start Celebration Timer!</button>
+    </section>
+  </main>
+
+  <!-- Winner Announcement Section -->
+  <section id="winner-section" class="winner-section">
+    <h2 class="winner-title">🏆 Award Winners 🏆</h2>
+    <div id="winner-display" class="winner-display">
+      <div class="winner-placeholder">Loading winners...</div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
